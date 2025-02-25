@@ -1,6 +1,3 @@
-// import BreadcrumbSection from "@/components/shared/BreadcrumbSection";
-// import MobileSidebar from "@/components/shared/MobileSidebar";
-// import Profile from "@/components/shared/Profile";
 import Sidebar from "@/components/shared/Sidebar";
 import { UserProvider } from "@/context/UserContext";
 
