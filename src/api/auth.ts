@@ -32,6 +32,10 @@ api.interceptors.response.use(
   }
 );
 
+export const getToken = () => {
+  return Cookies.get("accessToken");
+};
+
 export const userLogin = async (data: UserLoginType) => {
   try {
     const response = await api.post("/account/login", data);

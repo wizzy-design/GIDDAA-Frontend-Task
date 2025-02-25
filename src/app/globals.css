@@ -30,3 +30,12 @@
   scrollbar-width: thin; /* "auto" or "thin" */
   scrollbar-color: #c1c1c1 #efefef; /* Thumb and track color */
 }
+
+/* Green gradient border */
+.green-gradient-border {
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background-image: linear-gradient(#EAFFEA, #EAFFEA), linear-gradient(0deg, #335f32, #335f32);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
