@@ -8,34 +8,36 @@ import {
 
 const Header = () => {
   return (
-    <header className="flex justify-between">
-      <div className="flex items-center gap-6">
+    <header className="flex flex-col items-center justify-between p-4 md:flex-row md:items-start">
+      <div className="mb-4 flex items-center gap-4 md:mb-0 md:gap-6">
         {/* Arrow buttons */}
-        <div className="flex items-center gap-2.5">
-          <button className="flex h-4 w-4 items-center justify-center rounded-[2px] bg-[#F0F0F0]">
+        <div className="flex items-center gap-2">
+          <button className="flex h-6 w-6 items-center justify-center rounded-[2px] bg-[#F0F0F0] md:h-4 md:w-4">
             <IoMdArrowDropleft className="text-black" size={22} />
           </button>
-          <button className="flex h-4 w-4 items-center justify-center rounded-[2px] bg-[#F0F0F0] opacity-50">
+          <button className="flex h-6 w-6 items-center justify-center rounded-[2px] bg-[#F0F0F0] opacity-50 md:h-4 md:w-4">
             <IoMdArrowDropright className="opacity-50" size={22} />
           </button>
         </div>
 
-        <h2 className="font-millik font-semibold">My Properties</h2>
+        <h2 className="font-millik text-lg font-semibold md:text-base">
+          My Properties
+        </h2>
       </div>
 
       {/* Search Bar */}
-      <div className="flex w-full max-w-[374px] items-center rounded-[100px] bg-[#F0F0F0] px-4 py-2">
+      <div className="mb-4 flex w-full max-w-full items-center rounded-[100px] bg-[#F0F0F0] px-4 py-2 md:mb-0 md:max-w-[374px]">
         <Image src="search.svg" alt="Search Icon" width={20} height={20} />
         <input
           type="text"
           placeholder="Search for anything..."
-          className="text-sx ml-2.5 flex-1 bg-transparent text-[#4B4B4B] outline-none placeholder:text-[#4B4B4B]"
+          className="ml-2.5 flex-1 bg-transparent text-sm text-[#4B4B4B] outline-none placeholder:text-[#4B4B4B]"
         />
       </div>
 
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-4 md:gap-6">
         <HowItWorks />
-        <button className="rounded-full bg-[#F0F0F0] p-2.5">
+        <button className="rounded-full bg-[#F0F0F0] p-2">
           <Image
             src="notification.svg"
             alt="Header icons"
@@ -43,10 +45,10 @@ const Header = () => {
             height={16}
           />
         </button>
-        <button className="rounded-full bg-[#F0F0F0] p-2.5">
+        <button className="rounded-full bg-[#F0F0F0] p-2">
           <Image src="clock.svg" alt="Header icons" width={16} height={16} />
         </button>
-        <button className="rounded-full bg-[#F0F0F0] p-2.5">
+        <button className="rounded-full bg-[#F0F0F0] p-2">
           <Image src="share.svg" alt="Header icons" width={16} height={16} />
         </button>
       </div>
@@ -60,7 +62,7 @@ export function HowItWorks() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button className="flex items-center gap-2 rounded-full bg-[#F0F0F0] px-4 py-2.5">
+        <button className="flex items-center gap-2 rounded-full bg-[#F0F0F0] px-3 py-2">
           <Image
             src="howitworks.svg"
             alt="Header icons"
@@ -68,7 +70,7 @@ export function HowItWorks() {
             height={16}
           />
 
-          <span className="bg-gradient-to-b from-[#335F32] to-[#335F32] bg-clip-text font-bold text-transparent">
+          <span className="bg-gradient-to-b from-[#335F32] to-[#335F32] bg-clip-text text-sm font-bold text-transparent">
             How It Works
           </span>
 
