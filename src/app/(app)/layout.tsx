@@ -11,7 +11,7 @@ export default function DashboardLayout({
       <main className="flex items-start gap-0 bg-[#F8F9FA]">
         <Sidebar />
 
-        <div className="mt-6 w-full space-y-5 px-4 py-6 pb-40 md:overflow-hidden lg:mt-0 lg:space-y-10">
+        <div className="mt-6 w-full space-y-5 md:overflow-hidden lg:mt-0 lg:space-y-10">
           {children}
         </div>
       </main>

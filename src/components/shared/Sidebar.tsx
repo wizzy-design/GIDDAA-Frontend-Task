@@ -33,7 +33,7 @@ const Sidebar = () => {
           isOpen ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0`}
       >
-        <header className="my-8 flex flex-col gap-4 border-b border-solid border-[#979797] pb-6">
+        <header className="my-8 flex h-[108px] flex-col gap-4 border-b border-solid border-[#979797]">
           <Image
             src="/logo.svg"
             alt=""
