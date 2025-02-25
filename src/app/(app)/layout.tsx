@@ -14,13 +14,7 @@ export default function DashboardLayout({
       <main className="flex items-start gap-0 bg-[#F8F9FA]">
         <Sidebar />
 
-        <div className="w-full space-y-5 px-4 py-6 pb-40 md:overflow-hidden lg:space-y-10">
-          {/* <div className="flex items-center justify-end lg:justify-between lg:pr-10">
-            <BreadcrumbSection />
-
-            <Profile />
-          </div> */}
-
+        <div className="mt-6 w-full space-y-5 px-4 py-6 pb-40 md:overflow-hidden lg:mt-0 lg:space-y-10">
           {children}
         </div>
       </main>
