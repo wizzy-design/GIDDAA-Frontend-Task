@@ -7,6 +7,7 @@ import { getAllEstates } from "@/api/estates";
 import { Estate } from "@/models/estate";
 import Loader from "../shared/Loader";
 import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
+import Link from "next/link";
 
 const Estates = () => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -17,7 +18,7 @@ const Estates = () => {
   });
 
   const handleNextPage = () => {
-    if (data && data.value.totalPages > pageNumber) {
+    if (data && data?.value.totalPages > pageNumber) {
       setPageNumber((prevPage) => prevPage + 1);
     }
   };
@@ -35,13 +36,15 @@ const Estates = () => {
           {isLoading ? (
             <div className="h-6 w-32 bg-gray-200 animate-pulse rounded"></div>
           ) : (
-            `Estates - ${data.value.totalRecords}`
+            `Estates - ${data?.value.totalRecords}`
           )}
         </h2>
 
-        <button className="bg-[#346633] py-2 rounded-[100px] min-w-[122px]  text-white h-[40px] px-1.5 font-bold">
-          + Create Estate
-        </button>
+        <Link href={"/create-estate"}>
+          <button className="bg-[#346633] py-2 rounded-[100px] min-w-[122px]  text-white h-[40px] px-1.5 font-bold">
+            + Create Estate
+          </button>
+        </Link>
       </div>
 
       {isLoading ? (
@@ -76,7 +79,7 @@ const Estates = () => {
             </button>
             <button
               onClick={handleNextPage}
-              disabled={data && pageNumber === data.value.totalPages}
+              disabled={data && pageNumber === data?.value.totalPages}
               className="bg-gradient-to-b from-[#335F32] to-[#335F32] bg-opacity-20 rounded-[4px] p-2 transform transition-transform duration-150 active:scale-95"
             >
               <FaCaretRight className="text-white" />
@@ -85,8 +88,8 @@ const Estates = () => {
 
           <div className="green-gradient-text">
             View{" "}
-            {data.value.totalRecords -
-              data.value.pageNumber * data.value.pageSize}{" "}
+            {data?.value.totalRecords -
+              data?.value.pageNumber * data?.value.pageSize}{" "}
             more
           </div>
         </div>

@@ -29,7 +29,7 @@ const Sidebar = () => {
       </button>
 
       <div
-        className={`custom-scrollbar3 fixed lg:sticky left-0 top-0 h-screen min-w-[250px] overflow-auto bg-[#335F32] text-white transition-transform duration-300 ${
+        className={`custom-scrollbar3 fixed lg:sticky left-0 top-0 min-h-screen h-full min-w-[250px] overflow-auto bg-[#335F32] text-white transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0`}
       >
