@@ -90,7 +90,7 @@ const Header = () => {
 
 export default Header;
 
-export function HowItWorks() {
+function HowItWorks() {
   return (
     <Popover>
       <PopoverTrigger asChild>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
-import Router from "next/router";
+// import Router from "next/router";
 import { UserLoginType } from "@/models/auth";
 
 export const api = axios.create({
@@ -13,24 +13,24 @@ export const api = axios.create({
 });
 
 // Set up an interceptor for the API responses
-api.interceptors.response.use(
-  // If the response is successful, simply return it
-  (response) => {
-    return response;
-  },
-  // If there is an error in the response
-  (error) => {
-    // Check if the error status is 401, indicating unauthorized access
-    if (error.response?.status === 401) {
-      // Remove the access token from cookies as it might be invalid or expired
-      Cookies.remove("accessToken");
-      // Redirect the user to the login page to re-authenticate
-      Router.push("/login");
-    }
-    // Reject the promise with the error to handle it later
-    return Promise.reject(error);
-  }
-);
+// api.interceptors.response.use(
+//   // If the response is successful, simply return it
+//   (response) => {
+//     return response;
+//   },
+//   // If there is an error in the response
+//   (error) => {
+//     // Check if the error status is 401, indicating unauthorized access
+//     if (error.response?.status === 401) {
+//       // Remove the access token from cookies as it might be invalid or expired
+//       Cookies.remove("accessToken");
+//       // Redirect the user to the login page to re-authenticate
+//       Router.push("/login");
+//     }
+//     // Reject the promise with the error to handle it later
+//     return Promise.reject(error);
+//   }
+// );
 
 export const getToken = () => {
   return Cookies.get("accessToken");
