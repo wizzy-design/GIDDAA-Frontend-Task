@@ -8,7 +8,7 @@ import {
 
 const Header = () => {
   return (
-    <header className="flex h-[140px] flex-col gap-2 border-b border-solid border-[#F0F0F0] pt-4">
+    <header className="flex h-[140px] flex-col gap-2 border-b border-solid border-[#F0F0F0] pt-4 mb-12 lg:mb-0">
       <div className="flex flex-col items-center justify-between p-4 px-5 md:flex-row md:items-start">
         <div className="mb-4 flex items-center gap-4 md:mb-0 md:gap-6">
           {/* Arrow buttons */}

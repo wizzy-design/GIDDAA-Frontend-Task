@@ -19,8 +19,8 @@ const EstateCard: React.FC<EstateCardProps> = ({
   estateAddress,
 }) => {
   return (
-    <section className="max-w-[300px] overflow-hidden rounded-[8px] border border-solid border-[#D9D9D9] shadow-[0px_4px_4px_1px_#00000003]">
-      <div className="relative min-h-[110.66666412353516px] w-full bg-red-500">
+    <section className="relative h-[290px] w-full overflow-hidden rounded-[8px] border border-solid border-[#D9D9D9] shadow-[0px_4px_4px_1px_#00000003]">
+      <div className="relative min-h-[110.66666412353516px] w-full ">
         {/* Estate Image */}
         <Image
           src={estateImage}
@@ -42,11 +42,15 @@ const EstateCard: React.FC<EstateCardProps> = ({
         </p>
       </div>
       <div className="p-4">
-        <h2 className="text-lg font-semibold">{estateName}</h2>
-        <p className="text-sm text-gray-600">{estateAddress}</p>
+        <h2 className="text-lg font-semibold text-center">{estateName}</h2>
+        <p className="text-sm text-gray-600 text-center text-ellipsis">
+          {estateAddress}
+        </p>
       </div>
 
-      <EstateOptions />
+      <div className="absolute right-3 bottom-3">
+        <EstateOptions />
+      </div>
     </section>
   );
 };
@@ -57,13 +61,8 @@ function EstateOptions() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button className="flex h-[36px] items-center gap-2 rounded-full bg-[#F0F0F0] px-4 py-2">
-          <Image
-            src="3-dots.svg"
-            alt="3 dots icons"
-            width={16}
-            height={16}
-          />
+        <button className="flex h-[33.999995749028542] justify-center items-center gap-2 rounded-full bg-[#F0F0F0] w-[32.133337127015754]">
+          <Image src="3-dots.svg" alt="3 dots icons" width={16} height={16} />
         </button>
       </PopoverTrigger>
       <PopoverContent
@@ -71,14 +70,42 @@ function EstateOptions() {
         sideOffset={16}
         align="start"
       >
-        <ul className="space-y-2">
-          <li className="flex items-center gap-2.5">
-            <Image src="tour.svg" alt="Tour icon" width={16} height={16} />{" "}
-            Product Tour & Guide
+        <ul className="space-y-4">
+          <li className="flex items-center gap-2.5 text-xs">
+            <Image
+              src="viewHouse.svg"
+              alt="View House icon"
+              width={16}
+              height={16}
+            />{" "}
+            View House
           </li>
-          <li className="flex items-center gap-2.5">
-            <Image src="play.svg" alt="Play icon" width={16} height={16} />{" "}
-            Video Tutorial
+          <li className="flex items-center gap-2.5 text-xs">
+            <Image
+              src="editEstate.svg"
+              alt="Edit Estate icon"
+              width={16}
+              height={16}
+            />{" "}
+            Edit Estate
+          </li>
+          <li className="flex items-center gap-2.5 text-xs">
+            <Image
+              src="addHouse.svg"
+              alt="Add House icon"
+              width={16}
+              height={16}
+            />{" "}
+            Add House
+          </li>
+          <li className="flex items-center gap-2.5 text-xs text-[#E40000]">
+            <Image
+              src="deleteEstate.svg"
+              alt="Delete Estate icon"
+              width={16}
+              height={16}
+            />{" "}
+            Delete Estate
           </li>
         </ul>
       </PopoverContent>
