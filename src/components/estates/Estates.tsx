@@ -41,7 +41,7 @@ const Estates = () => {
         </h2>
 
         <Link href={"/create-estate"}>
-          <button className="bg-[#346633] py-2 rounded-[100px] min-w-[122px]  text-white h-[40px] px-1.5 font-bold">
+          <button className="bg-[#346633] py-2 text-sm rounded-[100px] min-w-[122px]  text-white h-[40px] px-1.5 font-bold">
             + Create Estate
           </button>
         </Link>

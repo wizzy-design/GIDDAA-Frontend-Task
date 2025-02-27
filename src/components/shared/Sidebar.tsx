@@ -1,8 +1,10 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import useUser from "@/context/UserContext";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -64,8 +66,39 @@ const Sidebar = () => {
               <p>{item.name}</p>
             </div>
           ))}
-          <div className="space-y-3 bg-red-500 absolute bottom-2.5">
-            COME BACK TO THIS
+
+          {/* Username and email */}
+          <div className="fixed bottom-2.5 w-[210px] xl:bottom-1/2">
+            <div className="flex h-[33.999995749028542]  items-center gap-2  bg-[#F0F0F0] rounded-[100px] px-3 py-5 cursor-pointer">
+              {sessionStorage.getItem("logo") ? (
+                <Image
+                  src={sessionStorage.getItem("logo") || ""}
+                  alt="User logo"
+                  width={29}
+                  height={29}
+                  className="rounded-full"
+                />
+              ) : (
+                <div className="flex items-center justify-center w-8 h-8 bg-gray-300 rounded-full">
+                  <span className="text-sm font-bold text-white">
+                    {sessionStorage
+                      .getItem("fullName")
+                      ?.charAt(0)
+                      .toUpperCase()}
+                  </span>
+                </div>
+              )}
+
+              <div className="truncate flex flex-col">
+                <span className="text-[11px] text-black font-semibold">
+                  {sessionStorage.getItem("fullName")}
+                </span>
+                <span className="text-[9px] text-[#667085] font-semibold">
+                  {sessionStorage.getItem("email")}
+                </span>
+              </div>
+              <SidebarPopup />
+            </div>
           </div>
         </div>
       </div>
@@ -89,3 +122,67 @@ const menuItems = [
   // { name: "Risk Assessment", icon: "/Risk.svg" },
   // { name: "Organization Settings", icon: "/Organization.svg" },
 ];
+
+function SidebarPopup() {
+  const { logout } = useUser();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    logout();
+    router.push("/login");
+  };
+
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Image
+          src={"/3-dots.svg"}
+          alt="3 dots"
+          width={10.84}
+          height={1.0159592628479004}
+          className="rotate-90 absolute right-2 w-3"
+        />
+      </PopoverTrigger>
+      <PopoverContent
+        className="w-fit rounded-[15px] border border-solid border-[#E1E1E1] shadow-sm bg-white p-0"
+        sideOffset={20}
+        align="end"
+      >
+        <ul className="space-y-4">
+          <li className="flex items-center gap-2.5 text-xs px-4 py-1 pt-3">
+            <Image
+              src="/profile.svg"
+              alt="Profile icon"
+              width={16}
+              height={16}
+            />{" "}
+            My Profile
+          </li>
+          <li className="flex items-center gap-2.5 text-xs px-4 ">
+            <Image
+              src="/changePass.svg"
+              alt="Change password icon"
+              width={16}
+              height={16}
+            />{" "}
+            Change Password
+          </li>
+          <li className="flex items-center gap-2.5 text-xs text-[#E40000] border-t border-solid border-[#F0F0F0] px-4 py-3 cursor-pointer">
+            <button
+              onClick={handleLogout}
+              className=" flex items-center gap-2 focus:outline-none"
+            >
+              <Image
+                src="/logout.svg"
+                alt="Logout icon"
+                width={16}
+                height={16}
+              />{" "}
+              Logout
+            </button>
+          </li>
+        </ul>
+      </PopoverContent>
+    </Popover>
+  );
+}

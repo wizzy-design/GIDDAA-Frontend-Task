@@ -21,6 +21,10 @@ const Login = () => {
     onSuccess: (response) => {
       console.log("Login successful", response);
       setAccessToken(response.value.value.token);
+      sessionStorage.setItem("email", response.value.value.user.email);
+      sessionStorage.setItem("logo", response.value.value.user.organization.logo);
+      sessionStorage.setItem("fullName", response.value.value.user.name);
+      
       router.push("/properties");
       toast.success("Login Successful");
     },
