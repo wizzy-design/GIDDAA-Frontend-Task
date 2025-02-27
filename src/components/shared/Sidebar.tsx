@@ -12,7 +12,7 @@ const Sidebar = () => {
     <div className="relative">
       <button
         onClick={() => setIsOpen(true)}
-        className={`absolute left-4 top-6 z-50 md:hidden ${
+        className={`absolute left-4 top-6 lg:hidden ${
           isOpen ? "hidden" : "block"
         }`}
       >
@@ -21,7 +21,7 @@ const Sidebar = () => {
 
       <button
         onClick={() => setIsOpen(false)}
-        className={`absolute left-[210px] top-6 z-50 md:hidden ${
+        className={`absolute left-[210px] top-6 z-[60] lg:hidden ${
           isOpen ? "block" : "hidden"
         }`}
       >
@@ -29,7 +29,7 @@ const Sidebar = () => {
       </button>
 
       <div
-        className={`custom-scrollbar3 fixed lg:sticky left-0 top-0 min-h-screen h-full min-w-[250px] overflow-auto bg-[#335F32] text-white transition-transform duration-300 ${
+        className={`custom-scrollbar3 fixed  left-0 top-0 z-50 h-screen min-w-[250px] overflow-auto bg-[#335F32] text-white transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0`}
       >
@@ -64,7 +64,9 @@ const Sidebar = () => {
               <p>{item.name}</p>
             </div>
           ))}
-          <div className="space-y-3 bg-red-500">COME BACK TO THIS</div>
+          <div className="space-y-3 bg-red-500 absolute bottom-2.5">
+            COME BACK TO THIS
+          </div>
         </div>
       </div>
     </div>
@@ -74,16 +76,16 @@ const Sidebar = () => {
 export default Sidebar;
 
 const menuItems = [
-  { name: "Dashboard", icon: "Dashboard.svg" },
-  { name: "Properties", icon: "Properties.svg" },
-  { name: "Plans", icon: "Plans.svg" },
-  { name: "Mortgage Options", icon: "Mortgage.svg" },
-  { name: "CRM", icon: "CRM.svg" },
-  { name: "Sales & Transactions", icon: "Sales.svg" },
-  { name: "House Inspections", icon: "House.svg" },
-  { name: "Leads", icon: "Leads.svg" },
-  { name: "Applications", icon: "Applications.svg" },
-  { name: "Application Review", icon: "Review.svg" },
-  { name: "Risk Assessment", icon: "Risk.svg" },
-  { name: "Organization Settings", icon: "Organization.svg" },
+  { name: "Dashboard", icon: "/Dashboard.svg" },
+  { name: "Properties", icon: "/Properties.svg" },
+  // { name: "Plans", icon: "/Plans.svg" },
+  // { name: "Mortgage Options", icon: "/Mortgage.svg" },
+  // { name: "CRM", icon: "/CRM.svg" },
+  // { name: "Sales & Transactions", icon: "/Sales.svg" },
+  // { name: "House Inspections", icon: "/House.svg" },
+  // { name: "Leads", icon: "/Leads.svg" },
+  // { name: "Applications", icon: "/Applications.svg" },
+  // { name: "Application Review", icon: "/Review.svg" },
+  // { name: "Risk Assessment", icon: "/Risk.svg" },
+  // { name: "Organization Settings", icon: "/Organization.svg" },
 ];

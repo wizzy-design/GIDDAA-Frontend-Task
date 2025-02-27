@@ -4,12 +4,14 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import Link from "next/link";
 
 interface EstateCardProps {
   estateImage: string;
   estateName: string;
   numberOfHouses: number;
   estateAddress: string;
+  estateId: string;
 }
 
 const EstateCard: React.FC<EstateCardProps> = ({
@@ -17,6 +19,7 @@ const EstateCard: React.FC<EstateCardProps> = ({
   estateName,
   numberOfHouses,
   estateAddress,
+  estateId,
 }) => {
   return (
     <section className="relative h-[290px] w-full overflow-hidden rounded-[8px] border border-solid border-[#D9D9D9] shadow-[0px_4px_4px_1px_#00000003]">
@@ -49,7 +52,7 @@ const EstateCard: React.FC<EstateCardProps> = ({
       </div>
 
       <div className="absolute right-3 bottom-3">
-        <EstateOptions />
+        <EstateOptions estateId={estateId} />
       </div>
     </section>
   );
@@ -57,7 +60,7 @@ const EstateCard: React.FC<EstateCardProps> = ({
 
 export default EstateCard;
 
-function EstateOptions() {
+function EstateOptions({ estateId }: { estateId: string }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -71,14 +74,19 @@ function EstateOptions() {
         align="start"
       >
         <ul className="space-y-4">
-          <li className="flex items-center gap-2.5 text-xs">
-            <Image
-              src="viewHouse.svg"
-              alt="View House icon"
-              width={16}
-              height={16}
-            />{" "}
-            View House
+          <li>
+            <Link
+              href={`/properties/${estateId}`}
+              className="flex items-center gap-2.5 text-xs"
+            >
+              <Image
+                src="viewHouse.svg"
+                alt="View House icon"
+                width={16}
+                height={16}
+              />{" "}
+              View House
+            </Link>
           </li>
           <li className="flex items-center gap-2.5 text-xs">
             <Image

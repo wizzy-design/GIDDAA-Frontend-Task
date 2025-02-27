@@ -60,6 +60,7 @@ const Estates = () => {
               estateName={estate.name}
               numberOfHouses={estate.houseStats.totalHouses}
               estateAddress={estate.address}
+              estateId={estate.id}
             />
           ))}
         </div>

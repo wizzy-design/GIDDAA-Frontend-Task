@@ -22,3 +22,19 @@ export const getAllEstates = async (
     throw new Error("There was an error fetching Estates");
   }
 };
+
+export const getEstateById = async (estateId: string) => {
+  try {
+    const response = await api.get(`/developer/estate/${estateId}`, {
+      headers: { Authorization: `Bearer ${getToken()}` },
+    });
+
+    return response.data.value;
+  } catch (error) {
+    console.log(error);
+
+    // toast.error(error?.response?.data.message);
+
+    throw new Error("There was an error fetching Estate details");
+  }
+};
