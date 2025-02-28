@@ -16,12 +16,17 @@ const EstateHeader: React.FC<HeaderProps> = ({
   viewHouse = false,
 }) => {
   return (
-    <header className="relative mb-12 flex h-[200px] items-center gap-2 border-b border-solid border-[#F0F0F0] pt-4 lg:mb-0 lg:h-[140px] lg:pt-4">
-      <div className="mb-4 flex w-full flex-col items-start gap-3 px-8 lg:flex-row lg:items-center lg:justify-between">
-        <div className="flex items-center">
+    <header className="relative mb-8 flex h-[200px] items-center gap-2 border-b border-solid border-[#F0F0F0] pt-4 lg:mb-0 lg:h-[140px] lg:pt-4">
+      <div className="pag-x-3 mb-4 flex w-full flex-col items-start gap-y-4 px-5 lg:flex-row lg:items-center lg:justify-between lg:gap-3 lg:px-8">
+        <div className="flex w-full items-center justify-between lg:w-auto lg:justify-start">
           <BackButton />
           <h1 className="ml-4 font-millik text-xl font-bold tracking-wider">
-            {pageTitle}
+            <span className="block lg:hidden">
+              {pageTitle.length > 15
+                ? `${pageTitle.substring(0, 12)}...`
+                : pageTitle}
+            </span>
+            <span className="hidden lg:block">{pageTitle}</span>
           </h1>
         </div>
 

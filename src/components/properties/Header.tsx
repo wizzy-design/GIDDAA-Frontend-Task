@@ -25,8 +25,8 @@ const Header = () => {
   };
 
   return (
-    <header className="mb-12 flex h-[140px] flex-col gap-2 border-b border-solid border-[#F0F0F0] pt-4 lg:mb-0">
-      <div className="flex flex-col items-center justify-between p-4 px-5 md:flex-row md:items-start">
+    <header className="mb-12 flex flex-col gap-2 border-b border-solid border-[#F0F0F0] pt-4 lg:mb-0 lg:h-[140px]">
+      <div className="flex flex-col items-center justify-between space-y-4 p-4 px-5 lg:flex-row lg:items-start lg:space-y-0">
         <div className="mb-4 flex items-center gap-4 md:mb-0 md:gap-6">
           {/* Arrow buttons */}
           <div className="flex items-center gap-2">

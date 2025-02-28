@@ -190,7 +190,7 @@ export default function CreateEstate() {
       </div>
 
       <div className="fixed bottom-0 w-full bg-[#F0F0F0] py-5">
-        <div className="flex w-full translate-x-[34%] gap-3">
+        <div className="flex w-full justify-center gap-3 lg:translate-x-[34%] lg:justify-start">
           <button className="rounded-[100px] border border-solid border-[#346633] px-4 py-2 font-bold text-[#346633]">
             Cancel
           </button>
@@ -220,7 +220,7 @@ function ImageUploader({ images, setImages }) {
     <>
       <div
         className="mb-6 flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-solid bg-[#FAFFFA] p-6"
-        onClick={() => document.getElementById('fileInput')?.click()}
+        onClick={() => document.getElementById("fileInput")?.click()}
       >
         <input
           id="fileInput"
@@ -309,8 +309,8 @@ function EstateForm({ estateDetails, setEstateDetails }) {
   });
 
   return (
-    <form className="grid grid-cols-4 gap-4">
-      <div>
+    <form className="grid grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="col-span-1">
         <label className="block text-sm font-medium">
           Name
           <span className="text-[#E40000]">*</span>
@@ -326,7 +326,7 @@ function EstateForm({ estateDetails, setEstateDetails }) {
         />
       </div>
 
-      <div>
+      <div className="col-span-1">
         <label className="block text-sm font-medium">
           Country
           <span className="text-[#E40000]">*</span>
@@ -351,7 +351,7 @@ function EstateForm({ estateDetails, setEstateDetails }) {
         </select>
       </div>
 
-      <div>
+      <div className="col-span-1">
         <label className="block text-sm font-medium">
           State
           <span className="text-[#E40000]">*</span>
@@ -374,7 +374,7 @@ function EstateForm({ estateDetails, setEstateDetails }) {
         </select>
       </div>
 
-      <div>
+      <div className="col-span-1">
         <label className="block text-sm font-medium">
           City
           <span className="text-[#E40000]">*</span>
@@ -399,7 +399,7 @@ function EstateForm({ estateDetails, setEstateDetails }) {
         </select>
       </div>
 
-      <div>
+      <div className="col-span-1">
         <label className="block text-sm font-medium">
           Address
           <span className="text-[#E40000]">*</span>
@@ -415,7 +415,7 @@ function EstateForm({ estateDetails, setEstateDetails }) {
         />
       </div>
 
-      <div>
+      <div className="col-span-1">
         <label className="block text-sm font-medium">Popular Landmark</label>
         <input
           type="text"
@@ -427,7 +427,7 @@ function EstateForm({ estateDetails, setEstateDetails }) {
         />
       </div>
 
-      <div>
+      <div className="col-span-1">
         <label className="block text-sm font-medium">
           Estate Land (In Hectares)
           <span className="text-[#E40000]">*</span>
@@ -446,7 +446,7 @@ function EstateForm({ estateDetails, setEstateDetails }) {
         />
       </div>
 
-      <div>
+      <div className="col-span-1">
         <label className="block text-sm font-medium">
           Completion Status
           <span className="text-[#E40000]">*</span>
@@ -467,7 +467,7 @@ function EstateForm({ estateDetails, setEstateDetails }) {
         </select>
       </div>
 
-      <div>
+      <div className="col-span-1">
         <label className="block text-sm font-medium">Video URL</label>
         <input
           type="text"
@@ -479,7 +479,7 @@ function EstateForm({ estateDetails, setEstateDetails }) {
         />
       </div>
 
-      <div>
+      <div className="col-span-1">
         <label className="block text-sm font-medium">Number of Floors</label>
         <input
           type="number"
@@ -494,7 +494,7 @@ function EstateForm({ estateDetails, setEstateDetails }) {
         />
       </div>
 
-      <div className="col-span-4 mb-32">
+      <div className="col-span-2 mb-32 lg:col-span-2 xl:col-span-4">
         <label className="block text-sm font-medium">
           Description
           <span className="text-[#E40000]">*</span>
