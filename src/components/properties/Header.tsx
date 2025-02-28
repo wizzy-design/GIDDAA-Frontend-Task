@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
 import {
@@ -5,10 +7,25 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import useUser from "@/context/UserContext";
+import { useState } from "react";
 
 const Header = () => {
+  const { setSearchTerm } = useUser();
+  const [inputValue, setInputValue] = useState("");
+
+  const handleSearch = () => {
+    setSearchTerm(inputValue);
+  };
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
-    <header className="flex h-[140px] flex-col gap-2 border-b border-solid border-[#F0F0F0] pt-4 mb-12 lg:mb-0">
+    <header className="mb-12 flex h-[140px] flex-col gap-2 border-b border-solid border-[#F0F0F0] pt-4 lg:mb-0">
       <div className="flex flex-col items-center justify-between p-4 px-5 md:flex-row md:items-start">
         <div className="mb-4 flex items-center gap-4 md:mb-0 md:gap-6">
           {/* Arrow buttons */}
@@ -21,18 +38,24 @@ const Header = () => {
             </button>
           </div>
 
-          <h2 className="font-millik text-lg font-semibold md:text-base">
+          <h2 className="font-millik text-lg font-semibold tracking-wider md:text-base">
             My Properties
           </h2>
         </div>
 
         {/* Search Bar */}
         <div className="mb-4 flex h-[35px] w-full max-w-full items-center rounded-[100px] bg-[#F0F0F0] px-4 py-2 md:mb-0 md:max-w-[374px]">
-          <Image src="search.svg" alt="Search Icon" width={20} height={20} />
+          <button onClick={handleSearch}>
+            <Image src="search.svg" alt="Search Icon" width={20} height={20} />
+          </button>
           <input
             type="text"
             placeholder="Search for anything..."
             className="ml-2.5 flex-1 bg-transparent text-sm text-[#4B4B4B] outline-none placeholder:text-[#4B4B4B]"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyDown={handleKeyPress}
+            onKeyUp={handleKeyPress}
           />
         </div>
 
@@ -115,7 +138,7 @@ function HowItWorks() {
         </button>
       </PopoverTrigger>
       <PopoverContent
-        className="w-fit rounded-[15px] border border-solid border-[#E1E1E1] shadow-sm"
+        className="w-fit rounded-[15px] border border-solid border-[#E1E1E1] bg-white shadow-sm"
         sideOffset={16}
         align="start"
       >

@@ -8,13 +8,15 @@ import { Estate } from "@/models/estate";
 import Loader from "../shared/Loader";
 import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
 import Link from "next/link";
+import useUser from "@/context/UserContext";
 
 const Estates = () => {
   const [pageNumber, setPageNumber] = useState(1);
+  const { searchTerm } = useUser();
 
   const { data, isLoading } = useQuery({
-    queryKey: ["estates", pageNumber],
-    queryFn: () => getAllEstates(pageNumber),
+    queryKey: ["estates", pageNumber, searchTerm],
+    queryFn: () => getAllEstates(pageNumber, searchTerm),
   });
 
   const handleNextPage = () => {

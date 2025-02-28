@@ -15,6 +15,8 @@ export interface UserContextType {
   loading: boolean;
   userObject: Record<string, any> | null;
   setUserObject: React.Dispatch<React.SetStateAction<Record<string, any> | null>>;
+  searchTerm: string;
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const UserContext = createContext<UserContextType | undefined>(
@@ -32,7 +34,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [userObject, setUserObject] = useState<Record<string, any> | null>(
     null
-  ); // Added userObject state
+  );
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   // Load tokens from cookies on initial render and set loggedIn state
   useEffect(() => {
@@ -40,7 +43,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const savedRefreshToken = Cookies.get("refreshToken");
     if (savedAccessToken) setAccessTokenState(savedAccessToken);
     if (savedRefreshToken) setRefreshTokenState(savedRefreshToken);
-    setLoggedIn(!!savedAccessToken); // Update loggedIn based on accessToken
+    setLoggedIn(!!savedAccessToken);
     setLoading(false);
   }, []);
 
@@ -56,8 +59,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
       secure: true,
       sameSite: "Strict",
       expires: 1,
-    }); // Expires in 1 hour
-    setLoggedIn(true); // User is logged in if accessToken is set
+    });
+    setLoggedIn(true);
   };
 
   // Function to update and set the refresh token
@@ -72,7 +75,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     setRefreshTokenState(null);
     Cookies.remove("accessToken");
     Cookies.remove("refreshToken");
-    setLoggedIn(false); // User is logged out if tokens are cleared
+    setLoggedIn(false);
   };
 
   const logout = () => {
@@ -91,6 +94,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     loading,
     userObject,
     setUserObject,
+    searchTerm,
+    setSearchTerm,
   };
 
   return (
