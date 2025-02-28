@@ -30,18 +30,18 @@ const Estates = () => {
   };
 
   return (
-    <section className="px-6 py-8 lg:py-0 md:px-4 lg:px-5">
-      <div className="flex justify-between items-center py-6">
-        <h2 className="text-xl lg:text-2xl">
+    <section className="px-6 py-8 md:px-4 lg:px-5 lg:py-0">
+      <div className="flex items-center justify-between py-6">
+        <h2 className="font-millik text-xl lg:text-2xl">
           {isLoading ? (
-            <div className="h-6 w-32 bg-gray-200 animate-pulse rounded"></div>
+            <div className="h-6 w-32 animate-pulse rounded bg-gray-200"></div>
           ) : (
             `Estates - ${data?.value.totalRecords}`
           )}
         </h2>
 
         <Link href={"/create-estate"}>
-          <button className="bg-[#346633] py-2 text-sm rounded-[100px] min-w-[122px]  text-white h-[40px] px-1.5 font-bold">
+          <button className="h-[40px] min-w-[122px] rounded-[100px] bg-[#346633] px-1.5 py-2 text-sm font-bold text-white">
             + Create Estate
           </button>
         </Link>
@@ -50,7 +50,7 @@ const Estates = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
           {data?.value.data?.map((estate: Estate) => (
             <EstateCard
               key={estate.id}
@@ -67,8 +67,8 @@ const Estates = () => {
       )}
 
       {!isLoading && (
-        <div className="w-full flex flex-col items-center gap-2 my-7">
-          <div className="flex gap-2 items-center">
+        <div className="my-7 flex w-full flex-col items-center gap-2">
+          <div className="flex items-center gap-2">
             <button
               onClick={handlePreviousPage}
               disabled={pageNumber === 1}
@@ -81,7 +81,7 @@ const Estates = () => {
             <button
               onClick={handleNextPage}
               disabled={data && pageNumber === data?.value.totalPages}
-              className="bg-gradient-to-b from-[#335F32] to-[#335F32] bg-opacity-20 rounded-[4px] p-2 transform transition-transform duration-150 active:scale-95"
+              className="transform rounded-[4px] bg-opacity-20 bg-gradient-to-b from-[#335F32] to-[#335F32] p-2 transition-transform duration-150 active:scale-95"
             >
               <FaCaretRight className="text-white" />
             </button>

@@ -68,8 +68,8 @@ const Sidebar = () => {
           ))}
 
           {/* Username and email */}
-          <div className="fixed bottom-2.5 w-[210px] xl:bottom-1/2">
-            <div className="flex h-[33.999995749028542]  items-center gap-2  bg-[#F0F0F0] rounded-[100px] px-3 py-5 cursor-pointer">
+          <div className="absolute bottom-2.5 w-[210px] 2xl:bottom-1/2">
+            <div className="flex h-[33.999995749028542] cursor-pointer items-center gap-2 rounded-[100px] bg-[#F0F0F0] px-3 py-5">
               {sessionStorage.getItem("logo") ? (
                 <Image
                   src={sessionStorage.getItem("logo") || ""}
@@ -79,7 +79,7 @@ const Sidebar = () => {
                   className="rounded-full"
                 />
               ) : (
-                <div className="flex items-center justify-center w-8 h-8 bg-gray-300 rounded-full">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-300">
                   <span className="text-sm font-bold text-white">
                     {sessionStorage
                       .getItem("fullName")
@@ -89,11 +89,11 @@ const Sidebar = () => {
                 </div>
               )}
 
-              <div className="truncate flex flex-col">
-                <span className="text-[11px] text-black font-semibold">
+              <div className="flex flex-col truncate">
+                <span className="text-[11px] font-semibold text-black">
                   {sessionStorage.getItem("fullName")}
                 </span>
-                <span className="text-[9px] text-[#667085] font-semibold">
+                <span className="text-[9px] font-semibold text-[#667085]">
                   {sessionStorage.getItem("email")}
                 </span>
               </div>
@@ -140,16 +140,16 @@ function SidebarPopup() {
           alt="3 dots"
           width={10.84}
           height={1.0159592628479004}
-          className="rotate-90 absolute right-2 w-3"
+          className="absolute right-2 w-5 rotate-90"
         />
       </PopoverTrigger>
       <PopoverContent
-        className="w-fit rounded-[15px] border border-solid border-[#E1E1E1] shadow-sm bg-white p-0"
+        className="w-fit rounded-[15px] border border-solid border-[#E1E1E1] bg-white p-0 shadow-sm"
         sideOffset={20}
         align="end"
       >
         <ul className="space-y-4">
-          <li className="flex items-center gap-2.5 text-xs px-4 py-1 pt-3">
+          <li className="flex items-center gap-2.5 px-4 py-1 pt-3 text-xs">
             <Image
               src="/profile.svg"
               alt="Profile icon"
@@ -158,7 +158,7 @@ function SidebarPopup() {
             />{" "}
             My Profile
           </li>
-          <li className="flex items-center gap-2.5 text-xs px-4 ">
+          <li className="flex items-center gap-2.5 px-4 text-xs">
             <Image
               src="/changePass.svg"
               alt="Change password icon"
@@ -167,10 +167,10 @@ function SidebarPopup() {
             />{" "}
             Change Password
           </li>
-          <li className="flex items-center gap-2.5 text-xs text-[#E40000] border-t border-solid border-[#F0F0F0] px-4 py-3 cursor-pointer">
+          <li className="flex cursor-pointer items-center gap-2.5 border-t border-solid border-[#F0F0F0] px-4 py-3 text-xs text-[#E40000]">
             <button
               onClick={handleLogout}
-              className=" flex items-center gap-2 focus:outline-none"
+              className="flex items-center gap-2 focus:outline-none"
             >
               <Image
                 src="/logout.svg"

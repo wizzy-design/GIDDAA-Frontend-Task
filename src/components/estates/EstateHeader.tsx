@@ -16,16 +16,18 @@ const EstateHeader: React.FC<HeaderProps> = ({
   viewHouse = false,
 }) => {
   return (
-    <header className="relative lg:h-[140px] h-[200px] flex items-center  gap-2 border-b border-solid border-[#F0F0F0] pt-4 lg:pt-4 mb-12 lg:mb-0">
-      <div className="flex flex-col lg:flex-row  items-start  lg:items-center px-8 mb-4 lg:justify-between w-full gap-3 ">
+    <header className="relative mb-12 flex h-[200px] items-center gap-2 border-b border-solid border-[#F0F0F0] pt-4 lg:mb-0 lg:h-[140px] lg:pt-4">
+      <div className="mb-4 flex w-full flex-col items-start gap-3 px-8 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex items-center">
           <BackButton />
-          <h1 className="ml-4 text-xl font-bold">{pageTitle}</h1>
+          <h1 className="ml-4 font-millik text-xl font-bold tracking-wider">
+            {pageTitle}
+          </h1>
         </div>
 
         {viewHouse && (
           <div className="flex items-center gap-3">
-            <button className="bg-[#346633] py-2 rounded-[100px] min-w-[122px]  text-white h-[40px] px-3 text-sm font-bold flex items-center gap-3">
+            <button className="flex h-[40px] min-w-[122px] items-center gap-3 rounded-[100px] bg-[#346633] px-3 py-2 text-sm font-bold text-white">
               <Image
                 src="/editEstate-white.svg"
                 alt="Edit Estate icon"
@@ -40,7 +42,7 @@ const EstateHeader: React.FC<HeaderProps> = ({
         )}
       </div>
 
-      <div className="flex items-center space-x-2 text-xs absolute bottom-3 left-5">
+      <div className="absolute bottom-3 left-5 flex items-center space-x-2 text-xs">
         <Link href="/properties">Estates</Link> <IoIosArrowForward />{" "}
         <span className="font-bold">{subPageTitle}</span>
       </div>
@@ -54,7 +56,7 @@ function EstateHeaderPopup() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button className="flex h-[33.999995749028542] justify-center items-center gap-2 rounded-full bg-[#F0F0F0] w-[32.133337127015754]">
+        <button className="flex h-[33.999995749028542] w-[32.133337127015754] items-center justify-center gap-2 rounded-full bg-[#F0F0F0]">
           <Image
             src="/3-dots.svg"
             alt="3 dots icons"
@@ -65,7 +67,7 @@ function EstateHeaderPopup() {
         </button>
       </PopoverTrigger>
       <PopoverContent
-        className="w-fit rounded-[15px] border border-solid border-[#E1E1E1] shadow-sm bg-white"
+        className="w-fit rounded-[15px] border border-solid border-[#E1E1E1] bg-white shadow-sm"
         sideOffset={16}
         align="start"
       >
