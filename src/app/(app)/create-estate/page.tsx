@@ -9,10 +9,11 @@ import {
   getCities,
   getStates,
   createEstate,
+  createEstateImage,
 } from "@/api/estates";
 import useUser from "@/context/UserContext";
 import Image from "next/image";
-import { CreateEstateTypes } from "@/models/estate";
+import { CreateEstateTypes, CreateImagesTypes } from "@/models/estate";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
@@ -24,7 +25,7 @@ export default function CreateEstate() {
     cityId: "",
     address: "",
     videoUrl: "",
-    ownerType: "",
+    ownerType: "Developer",
     landmark: "",
     description: "",
     completionStatus: "UNDER_CONSTRUCTION",
@@ -32,11 +33,100 @@ export default function CreateEstate() {
     completionLevel: 0,
     longitude: 0,
     latitude: 0,
-    features: [],
+    features: [
+      {
+        id: "string",
+        name: "string",
+        icon: "string",
+        hasAmpleParkingSpace: true,
+        hasUniformSecurity: true,
+        hasCCTVSurveillanceSystem: true,
+        hasInverter: true,
+        has24HoursElectricity: true,
+        hasInternetServices: true,
+        hasFiberOptics: true,
+        hasReliableWaterSupply: true,
+        hasChildernPlayground: true,
+        hasEquestrainOrPoloCenter: true,
+        hasTennisCourt: true,
+        hasGolfCourt: true,
+        hasLoungeOrBar: true,
+        hasResturant: true,
+        hasLakesOrPonds: true,
+        hasGazebos: true,
+        hasChildcareFacilities: true,
+        hasSchool: true,
+        hasHospital: true,
+        hasShoppingComplex: true,
+        hasChurchOrMosque: true,
+        hasGreeneryAndOpenGardens: true,
+        hasGym: true,
+        hasBasketballCourt: true,
+        hasFootballPitch: true,
+        hasSwimmingPool: true,
+        hasClubHouse: true,
+        hasBank: true,
+        hasCinema: true,
+        hasEnsuite: true,
+        hasPoPCeiling: true,
+        hasWalkInClosets: true,
+        hasAirConditioning: true,
+        hasSpeedInternet: true,
+        hasWineCeller: true,
+        hasFurnished: true,
+        hasWifi: true,
+        hasFibreOptics: true,
+        hasSatelliteTV: true,
+        hasElevator: true,
+        hasBoysQuarters: true,
+        hasSmartHomeTechnology: true,
+        hasFullyEquippedKitcken: true,
+        hasModernAppliances: true,
+        hasGraniteCountertops: true,
+        hasBreakfastBar: true,
+        hasStorageRoom: true,
+        hasUpgradedBathroomFeatures: true,
+        hasSpaLikeFeatures: true,
+        hasTileOrMarbleFeatures: true,
+        hasOpenFloorPlan: true,
+        hasLargeWindwos: true,
+        hasBuiltInHouseTheater: true,
+        hasPrivateBackyard: true,
+        hasPatioOrDarkSpace: true,
+        hasLandscapedGarden: true,
+        hasHomeOfficeSpace: true,
+        hasBuiltInShelfOrBookSpace: true,
+        hasAmpleNaturalLight: true,
+        hasSecuritySystem: true,
+        hasBulletProofDoors: true,
+        hasGatedCompound: true,
+        hasReinforcedDoorsAndWindows: true,
+        hasGaurdedCommunity: true,
+        hasUniformedSecurity: true,
+        hasParkingGarage: true,
+        hasDriveWaySpace: true,
+        hasStreetParkingAvaliability: true,
+        hasPrivateParkingSpace: true,
+        hasElectricity: true,
+        hasBackupGenerator: true,
+        hasBorehole: true,
+        hasWaterBoard: true,
+        hasProximityToSchools: true,
+        hasProximityToShoppingMalls: true,
+        hasProximityToSupermarkets: true,
+        hasNearByPublicTransportation: true,
+        hasAccessiblityViaBoltOrUber: true,
+        hasFencedBackyard: true,
+        hasPetFriendlyNeighbourhood: true,
+        hasNearbyWalkingTrailsAndSidewalks: true,
+      },
+    ],
     landSize: 0,
     organizationId: userObject?.organizationId,
     floors: 0,
   });
+
+  const [images, setImages] = useState<File[]>([]);
 
   const {
     mutate: createEstateMutation,
@@ -48,8 +138,34 @@ export default function CreateEstate() {
       const response = await createEstate(newEstate);
       return response;
     },
-    onSuccess: () => {
+    onSuccess: async (data) => {
       toast.success("Estate created successfully");
+      const estateId = data.estateId;
+      if (estateId) {
+        for (const image of images) {
+          const imageData: CreateImagesTypes = {
+            base64: await (async function convertToBase64(
+              file: File
+            ): Promise<string> {
+              return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result as string);
+                reader.onerror = (error) => reject(error);
+              });
+            })(image),
+            ownerId: estateId,
+            optionId: "ESTATE_IMAGE",
+            type: "ACTUAL_IMAGE",
+            extension: image.type.split("/")[1],
+            description: image.name,
+            name: image.name,
+            revisionId: null,
+            extraProperties: null,
+          };
+          await createEstateImage(estateId, imageData);
+        }
+      }
       router.push("/properties");
     },
     onError: (error) => {
@@ -66,7 +182,7 @@ export default function CreateEstate() {
       <EstateHeader pageTitle="Creating Estate" subPageTitle="Create Estate" />
 
       <div className="mx-auto rounded-lg bg-white p-6">
-        <ImageUploader />
+        <ImageUploader images={images} setImages={setImages} />
         <EstateForm
           estateDetails={estateDetails}
           setEstateDetails={setEstateDetails}
@@ -92,9 +208,7 @@ export default function CreateEstate() {
   );
 }
 
-function ImageUploader() {
-  const [images, setImages] = useState<File[]>([]);
-
+function ImageUploader({ images, setImages }) {
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const uploadedImages = Array.from(event.target.files);
@@ -315,14 +429,14 @@ function EstateForm({ estateDetails, setEstateDetails }) {
           <span className="text-[#E40000]">*</span>
         </label>
         <input
-          type="text"
+          type="number"
           className="mt-1 w-full rounded-[100px] border px-3 py-2 text-xs"
           required
           value={estateDetails.landSize}
           onChange={(e) =>
             setEstateDetails({
               ...estateDetails,
-              landSize: parseFloat(e.target.value),
+              landSize: e.target.value.toString(),
             })
           }
         />

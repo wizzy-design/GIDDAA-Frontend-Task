@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CreateEstateTypes, CreateImagesTypes } from "@/models/estate";
 import { api, getToken } from "./auth";
+import toast from "react-hot-toast";
 
 export const createEstate = async (estateData: CreateEstateTypes) => {
   try {
@@ -8,12 +10,12 @@ export const createEstate = async (estateData: CreateEstateTypes) => {
     });
 
     return response.data;
-  } catch (error) {
+  } catch (error: any) {
     console.log(error);
 
-    // toast.error(error?.response?.data.message);
-
-    throw new Error("There was an error creating the Estate");
+    const errorMessage = error.response?.data?.value?.mesage || "An unexpected error occurred";
+    toast.error(errorMessage);
+    throw new Error(errorMessage);
   }
 };
 
@@ -37,7 +39,6 @@ export const createEstateImage = async (
     throw new Error("There was an error uploading the estate image");
   }
 };
-
 
 export const getAllEstates = async (
   pageNumber: number,

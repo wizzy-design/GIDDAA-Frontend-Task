@@ -202,6 +202,6 @@ export interface CreateImagesTypes {
   extension: string;
   description: string;
   name: string;
-  extraProperties: string;
-  revisionId: string;
+  extraProperties: string | null;
+  revisionId: string | null;
 }
