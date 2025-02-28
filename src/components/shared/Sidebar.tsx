@@ -31,7 +31,7 @@ const Sidebar = () => {
       </button>
 
       <div
-        className={`custom-scrollbar3 fixed  left-0 top-0 z-50 h-screen min-w-[250px] overflow-auto bg-[#335F32] text-white transition-transform duration-300 ${
+        className={`custom-scrollbar3 fixed left-0 top-0 z-50 h-screen min-w-[250px] overflow-auto bg-[#335F32] text-white transition-transform duration-300 shadow-[0px_4px_4px_0px_#0000000D] ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0`}
       >

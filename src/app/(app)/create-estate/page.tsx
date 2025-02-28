@@ -218,22 +218,26 @@ function ImageUploader({ images, setImages }) {
 
   return (
     <>
-      <div className="mb-6 flex flex-col items-center gap-2 rounded-lg border-2 border-dashed p-6">
-        <label className="cursor-pointer">
-          <input
-            type="file"
-            accept="image/*"
-            multiple
-            className="hidden"
-            onChange={handleImageUpload}
-          />
+      <div
+        className="mb-6 flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-solid bg-[#FAFFFA] p-6"
+        onClick={() => document.getElementById('fileInput')?.click()}
+      >
+        <input
+          id="fileInput"
+          type="file"
+          accept="image/*"
+          multiple
+          className="hidden"
+          onChange={handleImageUpload}
+        />
+        <div className="mb-4 flex justify-center">
           <div className="rounded-xl bg-[linear-gradient(0deg,#335F32,#335F32),linear-gradient(0deg,rgba(0,0,0,0.2),rgba(0,0,0,0.2))] p-1">
             <HiPlus size={40} className="text-white" />
           </div>
-          <p className="text-xs font-bold capitalize text-[#335F32]">
-            add estate images
-          </p>
-        </label>
+        </div>
+        <p className="text-xs font-bold uppercase text-[#335F32]">
+          add estate images
+        </p>
       </div>
 
       <div className="mt-4 flex gap-2">
