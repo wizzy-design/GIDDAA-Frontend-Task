@@ -22,13 +22,11 @@ const Login = () => {
       console.log("Login successful", response);
       setAccessToken(response.value.value.token);
       setUserObject(response.value.value.user.organizationId);
-      sessionStorage.setItem("email", response.value.value.user.email);
-      sessionStorage.setItem(
-        "logo",
-        response.value.value.user.organization.logo
-      );
-      sessionStorage.setItem("fullName", response.value.value.user.name);
-
+      if (typeof window !== "undefined") {
+        localStorage.setItem("email", response.value.value.user.email);
+        localStorage.setItem("logo", response.value.value.user.organization.logo);
+        localStorage.setItem("fullName", response.value.value.user.name);
+      }
       router.push("/properties");
       toast.success("Login Successful");
     },
@@ -107,7 +105,7 @@ const Login = () => {
 
         {mutation.isError && (
           <p className="mt-4 text-center text-sm text-red-600">
-            {mutation.isError}
+            {mutation.error.message}
           </p>
         )}
       </div>

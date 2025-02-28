@@ -140,7 +140,7 @@ export default function CreateEstate() {
     },
     onSuccess: async (data) => {
       toast.success("Estate created successfully");
-      const estateId = data.estateId;
+      const estateId = data.value.value.id;
       if (estateId) {
         for (const image of images) {
           const imageData: CreateImagesTypes = {
@@ -208,7 +208,12 @@ export default function CreateEstate() {
   );
 }
 
-function ImageUploader({ images, setImages }) {
+type ImageUploaderProps = {
+  images: File[];
+  setImages: React.Dispatch<React.SetStateAction<File[]>>;
+};
+
+function ImageUploader({ images, setImages }: ImageUploaderProps) {
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const uploadedImages = Array.from(event.target.files);
@@ -285,7 +290,12 @@ function ImageUploader({ images, setImages }) {
   );
 }
 
-function EstateForm({ estateDetails, setEstateDetails }) {
+type EstateFormProps = {
+  estateDetails: CreateEstateTypes;
+  setEstateDetails: React.Dispatch<React.SetStateAction<CreateEstateTypes>>;
+};
+
+function EstateForm({ estateDetails, setEstateDetails }: EstateFormProps) {
   const [selectedCountryId, setSelectedCountryId] = useState<string | null>(
     null
   );
@@ -440,7 +450,7 @@ function EstateForm({ estateDetails, setEstateDetails }) {
           onChange={(e) =>
             setEstateDetails({
               ...estateDetails,
-              landSize: e.target.value.toString(),
+              landSize: parseFloat(e.target.value),
             })
           }
         />

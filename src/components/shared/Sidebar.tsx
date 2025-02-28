@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
@@ -9,6 +9,17 @@ import useUser from "@/context/UserContext";
 const Sidebar = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [userLogo, setUserLogo] = useState<string | null>(null);
+  const [userFullName, setUserFullName] = useState<string | null>(null);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setUserLogo(localStorage.getItem("logo"));
+      setUserFullName(localStorage.getItem("fullName"));
+      setUserEmail(localStorage.getItem("email"));
+    }
+  }, []);
 
   return (
     <div className="relative">
@@ -70,9 +81,9 @@ const Sidebar = () => {
           {/* Username and email */}
           <div className="absolute bottom-2.5 w-[210px] 2xl:bottom-1/2">
             <div className="flex h-[33.999995749028542] cursor-pointer items-center gap-2 rounded-[100px] bg-[#F0F0F0] px-3 py-5">
-              {sessionStorage.getItem("logo") ? (
+              {userLogo ? (
                 <Image
-                  src={sessionStorage.getItem("logo") || ""}
+                  src={userLogo}
                   alt="User logo"
                   width={29}
                   height={29}
@@ -81,20 +92,17 @@ const Sidebar = () => {
               ) : (
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-300">
                   <span className="text-sm font-bold text-white">
-                    {sessionStorage
-                      .getItem("fullName")
-                      ?.charAt(0)
-                      .toUpperCase()}
+                    {userFullName?.charAt(0).toUpperCase()}
                   </span>
                 </div>
               )}
 
               <div className="flex flex-col truncate">
                 <span className="text-[11px] font-semibold text-black">
-                  {sessionStorage.getItem("fullName")}
+                  {userFullName}
                 </span>
                 <span className="text-[9px] font-semibold text-[#667085]">
-                  {sessionStorage.getItem("email")}
+                  {userEmail}
                 </span>
               </div>
               <SidebarPopup />
