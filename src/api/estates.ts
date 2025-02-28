@@ -1,4 +1,43 @@
+import { CreateEstateTypes, CreateImagesTypes } from "@/models/estate";
 import { api, getToken } from "./auth";
+
+export const createEstate = async (estateData: CreateEstateTypes) => {
+  try {
+    const response = await api.post("/developer/estate/create", estateData, {
+      headers: { Authorization: `Bearer ${getToken()}` },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+
+    // toast.error(error?.response?.data.message);
+
+    throw new Error("There was an error creating the Estate");
+  }
+};
+
+export const createEstateImage = async (
+  estateId: string,
+  imageData: CreateImagesTypes
+) => {
+  try {
+    const response = await api.post(
+      `/developer/estate/${estateId}/upload-document`,
+      imageData,
+      {
+        headers: { Authorization: `Bearer ${getToken()}` },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+
+    throw new Error("There was an error uploading the estate image");
+  }
+};
+
 
 export const getAllEstates = async (
   pageNumber: number,

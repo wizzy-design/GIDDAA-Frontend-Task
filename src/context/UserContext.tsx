@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { createContext, useState, useEffect } from "react";
@@ -12,6 +13,8 @@ export interface UserContextType {
   setRefreshToken: (token: string) => void;
   logout: () => void;
   loading: boolean;
+  userObject: Record<string, any> | null;
+  setUserObject: React.Dispatch<React.SetStateAction<Record<string, any> | null>>;
 }
 
 export const UserContext = createContext<UserContextType | undefined>(
@@ -27,6 +30,9 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [refreshToken, setRefreshTokenState] = useState<string | null>(null);
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+  const [userObject, setUserObject] = useState<Record<string, any> | null>(
+    null
+  ); // Added userObject state
 
   // Load tokens from cookies on initial render and set loggedIn state
   useEffect(() => {
@@ -83,6 +89,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     setRefreshToken,
     logout,
     loading,
+    userObject,
+    setUserObject,
   };
 
   return (

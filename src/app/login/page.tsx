@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import useUser from "@/context/UserContext";
 
 const Login = () => {
-  const { setAccessToken } = useUser();
+  const { setAccessToken, setUserObject } = useUser();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,10 +21,14 @@ const Login = () => {
     onSuccess: (response) => {
       console.log("Login successful", response);
       setAccessToken(response.value.value.token);
+      setUserObject(response.value.value.user.organizationId);
       sessionStorage.setItem("email", response.value.value.user.email);
-      sessionStorage.setItem("logo", response.value.value.user.organization.logo);
+      sessionStorage.setItem(
+        "logo",
+        response.value.value.user.organization.logo
+      );
       sessionStorage.setItem("fullName", response.value.value.user.name);
-      
+
       router.push("/properties");
       toast.success("Login Successful");
     },

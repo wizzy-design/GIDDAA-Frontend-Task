@@ -3,18 +3,74 @@
 import EstateHeader from "@/components/estates/EstateHeader";
 import React, { useState } from "react";
 import { HiPlus } from "react-icons/hi";
-import { useQuery } from "@tanstack/react-query";
-import { getCountries, getCities, getStates } from "@/api/estates";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import {
+  getCountries,
+  getCities,
+  getStates,
+  createEstate,
+} from "@/api/estates";
+import useUser from "@/context/UserContext";
 import Image from "next/image";
+import { CreateEstateTypes } from "@/models/estate";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function CreateEstate() {
+  const router = useRouter();
+  const { userObject } = useUser();
+  const [estateDetails, setEstateDetails] = useState({
+    name: "",
+    cityId: "",
+    address: "",
+    videoUrl: "",
+    ownerType: "",
+    landmark: "",
+    description: "",
+    completionStatus: "UNDER_CONSTRUCTION",
+    completionDate: "2025-01-30T12:38:14.920Z",
+    completionLevel: 0,
+    longitude: 0,
+    latitude: 0,
+    features: [],
+    landSize: 0,
+    organizationId: userObject?.organizationId,
+    floors: 0,
+  });
+
+  const {
+    mutate: createEstateMutation,
+    isPending,
+    isError,
+    error,
+  } = useMutation({
+    mutationFn: async (newEstate: CreateEstateTypes) => {
+      const response = await createEstate(newEstate);
+      return response;
+    },
+    onSuccess: () => {
+      toast.success("Estate created successfully");
+      router.push("/properties");
+    },
+    onError: (error) => {
+      console.error("Error creating estate:", error);
+    },
+  });
+
+  const handleCreateEstate = () => {
+    createEstateMutation(estateDetails);
+  };
+
   return (
     <div className="min-h-screen">
       <EstateHeader pageTitle="Creating Estate" subPageTitle="Create Estate" />
 
       <div className="mx-auto rounded-lg bg-white p-6">
         <ImageUploader />
-        <EstateForm />
+        <EstateForm
+          estateDetails={estateDetails}
+          setEstateDetails={setEstateDetails}
+        />
       </div>
 
       <div className="fixed bottom-0 w-full bg-[#F0F0F0] py-5">
@@ -22,10 +78,15 @@ export default function CreateEstate() {
           <button className="rounded-[100px] border border-solid border-[#346633] px-4 py-2 font-bold text-[#346633]">
             Cancel
           </button>
-          <button className="rounded-[100px] bg-[#346633] px-4 py-2 font-bold text-white">
-            Create Estate
+          <button
+            className="rounded-[100px] bg-[#346633] px-4 py-2 font-bold text-white"
+            onClick={handleCreateEstate}
+            disabled={isPending}
+          >
+            {isPending ? "Creating Estate..." : "Create Estate"}
           </button>
         </div>
+        {isError && <p style={{ color: "red" }}>{error?.message}</p>}
       </div>
     </div>
   );
@@ -95,7 +156,9 @@ function ImageUploader() {
               </div>
             </div>
             <p className="mt-1 text-center text-xs font-bold text-[#335F32]">
-              {image.name.length > 15 ? `${image.name.substring(0, 12)}...` : image.name}
+              {image.name.length > 15
+                ? `${image.name.substring(0, 12)}...`
+                : image.name}
             </p>
           </div>
         ))}
@@ -104,7 +167,7 @@ function ImageUploader() {
   );
 }
 
-function EstateForm() {
+function EstateForm({ estateDetails, setEstateDetails }) {
   const [selectedCountryId, setSelectedCountryId] = useState<string | null>(
     null
   );
@@ -138,6 +201,10 @@ function EstateForm() {
           type="text"
           className="mt-1 w-full rounded-[100px] border px-3 py-2 text-xs"
           required
+          value={estateDetails.name}
+          onChange={(e) =>
+            setEstateDetails({ ...estateDetails, name: e.target.value })
+          }
         />
       </div>
 
@@ -197,13 +264,16 @@ function EstateForm() {
         <select
           className="mt-1 w-full rounded-[100px] border px-3 py-2 text-xs"
           required
+          onChange={(e) =>
+            setEstateDetails({ ...estateDetails, cityId: e.target.value })
+          }
         >
           <option value="">Select a city</option>
           {citiesLoading ? (
             <option>Loading...</option>
           ) : (
             cities?.value?.data?.map((city: { id: string; name: string }) => (
-              <option key={city.id} value={city.name}>
+              <option key={city.id} value={city.id}>
                 {city.name}
               </option>
             ))
@@ -220,6 +290,10 @@ function EstateForm() {
           type="text"
           className="mt-1 w-full rounded-[100px] border px-3 py-2 text-xs"
           required
+          value={estateDetails.address}
+          onChange={(e) =>
+            setEstateDetails({ ...estateDetails, address: e.target.value })
+          }
         />
       </div>
 
@@ -227,8 +301,11 @@ function EstateForm() {
         <label className="block text-sm font-medium">Popular Landmark</label>
         <input
           type="text"
-          placeholder="What's the asking price of this property?"
           className="mt-1 w-full rounded-[100px] border px-3 py-2 text-xs"
+          value={estateDetails.landmark}
+          onChange={(e) =>
+            setEstateDetails({ ...estateDetails, landmark: e.target.value })
+          }
         />
       </div>
 
@@ -241,6 +318,13 @@ function EstateForm() {
           type="text"
           className="mt-1 w-full rounded-[100px] border px-3 py-2 text-xs"
           required
+          value={estateDetails.landSize}
+          onChange={(e) =>
+            setEstateDetails({
+              ...estateDetails,
+              landSize: parseFloat(e.target.value),
+            })
+          }
         />
       </div>
 
@@ -252,15 +336,16 @@ function EstateForm() {
         <select
           className="mt-1 w-full rounded-[100px] border px-3 py-2 text-xs"
           required
+          value={estateDetails.completionStatus}
+          onChange={(e) =>
+            setEstateDetails({
+              ...estateDetails,
+              completionStatus: e.target.value,
+            })
+          }
         >
-          {["Completed", "Ongoing"].map((opt) => (
-            <option
-              key={opt}
-              value={opt === "Completed" ? "COMPLETED" : "UNDER_CONSTRUCTION"}
-            >
-              {opt}
-            </option>
-          ))}
+          <option value="UNDER_CONSTRUCTION">Under Construction</option>
+          <option value="COMPLETED">Completed</option>
         </select>
       </div>
 
@@ -268,8 +353,11 @@ function EstateForm() {
         <label className="block text-sm font-medium">Video URL</label>
         <input
           type="text"
-          placeholder="Add a Youtube Video Link"
           className="mt-1 w-full rounded-[100px] border px-3 py-2 text-xs"
+          value={estateDetails.videoUrl}
+          onChange={(e) =>
+            setEstateDetails({ ...estateDetails, videoUrl: e.target.value })
+          }
         />
       </div>
 
@@ -278,6 +366,13 @@ function EstateForm() {
         <input
           type="number"
           className="mt-1 w-full rounded-[100px] border px-3 py-2 text-xs"
+          value={estateDetails.floors}
+          onChange={(e) =>
+            setEstateDetails({
+              ...estateDetails,
+              floors: parseInt(e.target.value),
+            })
+          }
         />
       </div>
 
@@ -290,6 +385,10 @@ function EstateForm() {
           className="mt-1 w-full rounded-lg border px-3 py-2 text-xs"
           rows={4}
           required
+          value={estateDetails.description}
+          onChange={(e) =>
+            setEstateDetails({ ...estateDetails, description: e.target.value })
+          }
         ></textarea>
       </div>
     </form>
