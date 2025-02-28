@@ -150,7 +150,11 @@ export default function CreateEstate() {
               return new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result as string);
+                reader.onload = () => {
+                  const result = reader.result as string;
+                  const base64String = result.split(",")[1]; // Extract base64 string
+                  resolve(base64String);
+                };
                 reader.onerror = (error) => reject(error);
               });
             })(image),
@@ -177,6 +181,10 @@ export default function CreateEstate() {
     createEstateMutation(estateDetails);
   };
 
+  const handleCancel = () => {
+    router.push("/properties");
+  };
+
   return (
     <div className="min-h-screen">
       <EstateHeader pageTitle="Creating Estate" subPageTitle="Create Estate" />
@@ -191,7 +199,10 @@ export default function CreateEstate() {
 
       <div className="fixed bottom-0 w-full bg-[#F0F0F0] py-5">
         <div className="flex w-full justify-center gap-3 lg:translate-x-[34%] lg:justify-start">
-          <button className="rounded-[100px] border border-solid border-[#346633] px-4 py-2 font-bold text-[#346633]">
+          <button
+            className="rounded-[100px] border border-solid border-[#346633] px-4 py-2 font-bold text-[#346633]"
+            onClick={handleCancel}
+          >
             Cancel
           </button>
           <button
@@ -202,7 +213,7 @@ export default function CreateEstate() {
             {isPending ? "Creating Estate..." : "Create Estate"}
           </button>
         </div>
-        {isError && <p style={{ color: "red" }}>{error?.message}</p>}
+        {isError && toast.error(error?.message)}
       </div>
     </div>
   );
