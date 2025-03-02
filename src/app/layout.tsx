@@ -19,10 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={redHatDisplay.className}>
+      {/* I put suppressHydrationWarning={true} here because some browser extensions were causing hydration error */}
+      <body className={redHatDisplay.className} suppressHydrationWarning={true}>
         <QueryProvider>
           <UserProvider>
-            {typeof window !== "undefined" && <Toaster position="top-center" />}
+            <Toaster position="top-center" />
             {children}
           </UserProvider>
         </QueryProvider>

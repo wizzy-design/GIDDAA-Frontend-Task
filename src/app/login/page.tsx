@@ -8,6 +8,7 @@ import { LuLoaderCircle } from "react-icons/lu";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import useUser from "@/context/UserContext";
+import Image from "next/image";
 
 const Login = () => {
   const { setAccessToken, setUserObject } = useUser();
@@ -24,7 +25,10 @@ const Login = () => {
       setUserObject(response.value.value.user.organizationId);
       if (typeof window !== "undefined") {
         localStorage.setItem("email", response.value.value.user.email);
-        localStorage.setItem("logo", response.value.value.user.organization.logo);
+        localStorage.setItem(
+          "logo",
+          response.value.value.user.organization.logo
+        );
         localStorage.setItem("fullName", response.value.value.user.name);
       }
       router.push("/properties");
@@ -40,8 +44,12 @@ const Login = () => {
   return (
     <section className="flex min-h-screen items-center justify-center bg-[#FFEDCB] px-4">
       <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
+        <div className="flex justify-center mb-4">
+          <Image src="Logo2.svg" alt="Logo Icon" width={40} height={40} />
+        </div>
+
         <h1 className="mb-6 text-center text-2xl font-bold text-[#335F32]">
-          Login to Your Account
+          Login to Your Giddaa Account
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-5">
