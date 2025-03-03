@@ -1,8 +1,8 @@
 # Giddaa Dashboard
 
-This is the dashboard project for Giddaa, built using Next.js.
+This is the dashboard project for Giddaa, built using Next.js. Here is the live link 🚀: https://giddaa-properties-wisdom-ochei.netlify.app/login
 
-Getting Started
+# Getting Started
 Follow these steps to run the project locally:
 
 1. Clone the Repository:
