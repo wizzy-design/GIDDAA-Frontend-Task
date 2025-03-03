@@ -1,4 +1,5 @@
-Giddaa Dashboard
+# Giddaa Dashboard
+
 This is the dashboard project for Giddaa, built using Next.js.
 
 Getting Started
