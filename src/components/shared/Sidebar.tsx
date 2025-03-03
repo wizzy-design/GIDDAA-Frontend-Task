@@ -25,7 +25,7 @@ const Sidebar = () => {
     <div className="relative">
       <button
         onClick={() => setIsOpen(true)}
-        className={`absolute left-4 top-6 lg:hidden ${
+        className={`absolute left-4 top-6 lg:hidden  z-[60] ${
           isOpen ? "hidden" : "block"
         }`}
       >

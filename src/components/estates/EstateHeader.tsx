@@ -21,10 +21,8 @@ const EstateHeader: React.FC<HeaderProps> = ({
         <div className="flex w-full items-center justify-between lg:w-auto lg:justify-start">
           <BackButton />
           <h1 className="ml-4 font-millik text-xl font-bold tracking-wider">
-            <span className="block lg:hidden">
-              {pageTitle.length > 15
-                ? `${pageTitle.substring(0, 12)}...`
-                : pageTitle}
+            <span className="block max-w-[200px] truncate lg:hidden">
+              {pageTitle}
             </span>
             <span className="hidden lg:block">{pageTitle}</span>
           </h1>

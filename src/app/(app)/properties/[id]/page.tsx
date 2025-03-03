@@ -41,7 +41,27 @@ const ViewHouse = () => {
         subPageTitle={estate.name}
         viewHouse={true}
       />
-
+      <ul className="flex items-center gap-4 border-b border-[#F0F0F0] px-5 text-[13px] lg:pt-3">
+        <li className="green-gradient-text relative cursor-pointer font-semibold">
+          Details
+          <span className="absolute -bottom-2 left-0 w-full border-b-2 border-[#335F32]"></span>
+        </li>
+        <li className="cursor-pointer py-2 font-semibold text-[#979797]">
+          Properties
+        </li>
+        <li className="cursor-pointer py-2 font-semibold text-[#979797]">
+          Allocation
+        </li>
+        <li className="cursor-pointer py-2 font-semibold text-[#979797]">
+          Prospects
+        </li>
+        <li className="cursor-pointer py-2 font-semibold text-[#979797]">
+          Analytics
+        </li>
+        <li className="cursor-pointer py-2 font-semibold text-[#979797]">
+          Activity
+        </li>
+      </ul>
       {/* Estate Images */}
       <div className="m-6 grid grid-cols-1 gap-4 md:grid-cols-3">
         {estate.images.length > 0 ? (
@@ -92,7 +112,6 @@ const ViewHouse = () => {
           </div>
         )}
       </div>
-
       {/* Estate Details */}
       <div className="rounded-lg bg-white p-6 shadow">
         <div className="mb-4 flex items-center">
