@@ -7,7 +7,7 @@ Follow these steps to run the project locally:
 1. Clone the Repository:
    You can either download the ZIP file of the repository or clone it using Git:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/wizzy-design/GIDDAA-Frontend-Task.git
    ```
 
 2. Navigate to the Project Directory:
