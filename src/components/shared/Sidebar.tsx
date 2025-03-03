@@ -62,7 +62,9 @@ const Sidebar = () => {
         <div className="space-y-8 px-5 py-2">
           {menuItems.map((item, index) => (
             <Link
-              href={item.name === "Dashboard" ? "#" : "/" + item.name.toLowerCase()}
+              href={
+                item.name === "Dashboard" ? "#" : "/" + item.name.toLowerCase()
+              }
               key={index}
               className={`flex items-center gap-3 cursor-pointer text-sm font-bold ${
                 pathname.includes(item.name.toLowerCase())
@@ -82,8 +84,8 @@ const Sidebar = () => {
           ))}
 
           {/* Username and email */}
-          <div className="absolute bottom-3.5 max-h-[45px] w-[210px]">
-            <div className="flex h-[33.999995749028542] cursor-pointer items-center gap-2 rounded-[100px] bg-[#F0F0F0] px-3 py-5">
+          <div className="absolute bottom-3.5 w-[210px]">
+            <div className="flex h-[33.999995749028542px] cursor-pointer items-center gap-2 rounded-[100px] bg-[#F0F0F0] px-3 py-5">
               {userLogo ? (
                 <Image
                   src={userLogo}
