@@ -41,7 +41,7 @@ const ViewHouse = () => {
         subPageTitle={estate.name}
         viewHouse={true}
       />
-      <ul className="flex items-center gap-4 border-b border-[#F0F0F0] px-5 text-[13px] lg:pt-3">
+      <ul className="flex items-center gap-4 border-b border-[#F0F0F0] px-5 text-[13px] lg:pt-3 overflow-x-auto">
         <li className="green-gradient-text relative cursor-pointer font-semibold">
           Details
           <span className="absolute -bottom-2 left-0 w-full border-b-2 border-[#335F32]"></span>

@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import useUser from "@/context/UserContext";
+import Link from "next/link";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -60,13 +61,15 @@ const Sidebar = () => {
 
         <div className="space-y-8 px-5 py-2">
           {menuItems.map((item, index) => (
-            <div
+            <Link
+              href={item.name === "Dashboard" ? "#" : "/" + item.name.toLowerCase()}
               key={index}
               className={`flex items-center gap-3 cursor-pointer text-sm font-bold ${
                 pathname.includes(item.name.toLowerCase())
                   ? "bg-white rounded-[100px] px-4 py-2.5 text-[#335F32]"
                   : ""
               }`}
+              onClick={() => setIsOpen(false)}
             >
               <Image
                 src={item.icon}
@@ -75,11 +78,11 @@ const Sidebar = () => {
                 height={26}
               />
               <p>{item.name}</p>
-            </div>
+            </Link>
           ))}
 
           {/* Username and email */}
-          <div className="absolute bottom-2.5 w-[210px] 2xl:bottom-1/2">
+          <div className="absolute bottom-3.5 max-h-[45px] w-[210px]">
             <div className="flex h-[33.999995749028542] cursor-pointer items-center gap-2 rounded-[100px] bg-[#F0F0F0] px-3 py-5">
               {userLogo ? (
                 <Image
