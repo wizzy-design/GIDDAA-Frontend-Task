@@ -9,6 +9,7 @@ import Loader from "../shared/Loader";
 import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
 import Link from "next/link";
 import useUser from "@/context/UserContext";
+import { FaPlus } from "react-icons/fa6";
 
 const Estates = () => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -43,8 +44,8 @@ const Estates = () => {
         </h2>
 
         <Link href={"/create-estate"}>
-          <button className="h-[40px] min-w-[122px] rounded-[100px] bg-[#346633] px-1.5 py-2 text-sm font-bold text-white">
-            + Create Estate
+          <button className="flex h-[40px] min-w-[122px] items-center gap-1 rounded-[100px] bg-[#346633] px-1.5 py-2 text-sm font-bold text-white">
+            <FaPlus size={12} /> Create Estate
           </button>
         </Link>
       </div>
