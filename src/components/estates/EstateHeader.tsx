@@ -1,8 +1,11 @@
+"use client";
+
 import { IoIosArrowForward } from "react-icons/io";
 import BackButton from "../shared/BackButton";
 import Link from "next/link";
 import Image from "next/image";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { usePathname } from "next/navigation";
 
 interface HeaderProps {
   pageTitle: string;
@@ -15,29 +18,34 @@ const EstateHeader: React.FC<HeaderProps> = ({
   subPageTitle,
   viewHouse = false,
 }) => {
+  const pathname = usePathname();
+
   return (
-    <header className="relative mb-8 flex h-[200px] items-center gap-2 border-b border-solid border-[#F0F0F0] pt-4 lg:mb-0 lg:h-[140px] lg:pt-4">
-      <div className="pag-x-3 mb-4 flex w-full flex-col items-start gap-y-4 px-5 lg:flex-row lg:items-center lg:justify-between lg:gap-3 lg:px-8">
+    <header className="relative mb-8 flex h-[240px] items-center gap-2 border-b border-solid border-[#F0F0F0] pt-4 lg:mb-0 lg:h-[140px] lg:pt-4">
+      <div className="gap-x-3 mb-4 flex w-full flex-col items-start gap-y-4 px-5 lg:flex-row lg:items-center lg:justify-between lg:gap-3 lg:pl-5 lg:pr-0">
         <div className="flex w-full items-center justify-between lg:w-auto lg:justify-start">
           <BackButton />
           <h1 className="ml-4 font-millik text-xl font-bold tracking-wider">
-            <span className="block max-w-[200px] truncate lg:hidden">
-              {pageTitle}
-            </span>
             <span className="hidden lg:block">{pageTitle}</span>
           </h1>
         </div>
 
         {viewHouse && (
-          <div className="flex items-center gap-3">
-            <button className="flex h-[40px] min-w-[122px] items-center gap-3 rounded-[100px] bg-[#346633] px-3 py-2 text-sm font-bold text-white">
+          <div className="flex items-center gap-3 absolute right-4 top-[-1.5px]  lg:static lg:justify-end">
+            <button className="flex text-nowrap h-[33.999995749028542] w-[32.133337127015754] lg:h-[40px] lg:min-w-[122px] lg:w-2/3 justify-center  items-center gap-3 rounded-[100px] bg-[#346633] lg:px-6 lg:py-2 text-sm font-bold text-white">
               <Image
                 src="/editEstate-white.svg"
                 alt="Edit Estate icon"
                 width={16}
                 height={16}
-              />{" "}
-              Update Estate
+              />
+              <span
+                className={`${
+                  pathname.includes("properties") ? "hidden lg:inline" : ""
+                } `}
+              >
+                Update Estate
+              </span>
             </button>
 
             <EstateHeaderPopup />
@@ -45,9 +53,16 @@ const EstateHeader: React.FC<HeaderProps> = ({
         )}
       </div>
 
-      <div className="absolute bottom-3 left-5 flex items-center space-x-2 text-xs">
+      {/* Page title for mobile */}
+      <h1 className="ml-4 font-millik text-xl font-bold tracking-wider">
+        <span className="absolute left-5 bottom-10  lg:hidden">
+          {pageTitle}
+        </span>
+      </h1>
+
+      <div className="absolute bottom-1 left-5 flex items-center space-x-2 text-xs max-w-[90%]">
         <Link href="/properties">Estates</Link> <IoIosArrowForward />{" "}
-        <span className="font-bold">{subPageTitle}</span>
+        <span className="font-bold lg:max-w-full truncate">{subPageTitle}</span>
       </div>
     </header>
   );
